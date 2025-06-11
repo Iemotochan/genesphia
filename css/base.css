@@ -88,7 +88,6 @@ p {
 .start-content,
 .shadow-content,
 .level-content,
-.game-content,
 .completion-content {
     flex: 1;
     display: flex;
@@ -99,17 +98,36 @@ p {
     width: 100%;
 }
 
+.game-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+    max-width: 480px;
+    margin: 0 auto;
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+    justify-content: space-between;
+}
+
 /* Safe area handling for mobile */
 @supports (padding: max(0px)) {
     .start-content,
     .shadow-content,
     .level-content,
-    .game-content,
     .completion-content {
         padding-top: max(20px, env(safe-area-inset-top));
         padding-bottom: max(20px, env(safe-area-inset-bottom));
         padding-left: max(20px, env(safe-area-inset-left));
         padding-right: max(20px, env(safe-area-inset-right));
+    }
+    
+    .game-content {
+        padding-top: max(10px, env(safe-area-inset-top));
+        padding-bottom: max(10px, env(safe-area-inset-bottom));
+        padding-left: max(10px, env(safe-area-inset-left));
+        padding-right: max(10px, env(safe-area-inset-right));
     }
 }
 

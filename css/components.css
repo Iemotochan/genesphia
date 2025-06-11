@@ -337,8 +337,8 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    margin-bottom: 20px;
-    gap: 15px;
+    margin-bottom: 10px;
+    gap: 10px;
 }
 
 .progress-info {
@@ -390,7 +390,7 @@
     flex: 1;
     display: flex;
     align-items: center;
-    margin: 15px 0;
+    margin: 10px 0;
     min-height: 0;
 }
 
@@ -399,7 +399,7 @@
     backdrop-filter: blur(25px);
     border: 2px solid rgba(0, 0, 0, 0.6);
     border-radius: 25px;
-    padding: 20px;
+    padding: 15px;
     width: 100%;
     transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     cursor: pointer;
@@ -441,10 +441,10 @@
 }
 
 .question-text {
-    font-size: 1.2rem;
+    font-size: 1.1rem;
     font-weight: 600;
-    line-height: 1.5;
-    margin: 10px 0 25px;
+    line-height: 1.4;
+    margin: 5px 0 15px;
     color: white;
     text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
 }
@@ -454,26 +454,26 @@
     background: rgba(0, 0, 0, 0.3);
     backdrop-filter: blur(15px);
     border-radius: 15px;
-    padding: 15px;
-    margin: 15px 0;
+    padding: 10px;
+    margin: 10px 0;
     border: 1px solid rgba(0, 0, 0, 0.5);
 }
 
 .answer-examples h4 {
-    font-size: 1rem;
-    margin-bottom: 15px;
+    font-size: 0.9rem;
+    margin-bottom: 10px;
     color: rgba(255, 255, 255, 0.9);
 }
 
 .example-item {
     background: rgba(0, 0, 0, 0.2);
-    padding: 10px 15px;
-    margin: 8px 0;
+    padding: 8px 12px;
+    margin: 5px 0;
     border-radius: 12px;
     cursor: pointer;
     transition: all 0.3s ease;
     border: 1px solid rgba(0, 0, 0, 0.3);
-    font-size: 0.9rem;
+    font-size: 0.85rem;
 }
 
 .example-item:hover {
@@ -492,18 +492,18 @@
 .reaction-buttons {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    gap: 10px;
-    margin-top: 20px;
+    gap: 8px;
+    margin-top: 15px;
 }
 
 .reaction-btn {
     background: linear-gradient(135deg, #ff6b9d, #ff8cc8);
     color: white;
     border: none;
-    padding: 12px 16px;
-    border-radius: 20px;
+    padding: 10px 14px;
+    border-radius: 18px;
     font-weight: 600;
-    font-size: 0.9rem;
+    font-size: 0.85rem;
     cursor: pointer;
     transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     box-shadow: 0 6px 20px rgba(255, 107, 157, 0.4);
@@ -526,8 +526,9 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    gap: 10px;
-    margin-top: 20px;
+    gap: 6px;
+    margin-top: 10px;
+    flex-wrap: nowrap;
 }
 
 /* Completion Screen */
