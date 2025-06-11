@@ -51,13 +51,13 @@
                         <div class="mode-desc">創造的な質問で新しい発見を</div>
                     </button>
                     
-                    <button class="mode-btn shadow-mode" onclick="showShadowEntry()">
+                    <button class="mode-btn shadow-mode" onclick="startDirectMode('shadow')">
                         <div class="mode-icon">🔥</div>
                         <div class="mode-text">SHADOW MODE</div>
                         <div class="mode-desc">大人向けの刺激的な質問</div>
                     </button>
                     
-                    <button class="mode-btn chaos-mode" onclick="showChaosEntry()" id="chaosBtn">
+                    <button class="mode-btn chaos-mode" onclick="startDirectMode('chaos')">
                         <div class="mode-icon">⚡</div>
                         <div class="mode-text">CHAOS MODE</div>
                         <div class="mode-desc">究極の自己開示・魂の深層</div>
@@ -66,40 +66,7 @@
             </div>
         </div>
 
-        <!-- Shadow Password Screen -->
-        <div id="shadowScreen" class="screen">
-            <div class="shadow-content">
-                <div class="shadow-header">
-                    <h2>🔥 SHADOW MODE 🔥</h2>
-                    <p>18歳以上の大人向けコンテンツです</p>
-                </div>
-                
-                <div class="password-form">
-                    <input type="password" id="shadowPassword" placeholder="パスワードを入力" class="password-input" onkeypress="handleShadowPasswordKeypress(event)">
-                    <button class="password-btn" onclick="verifyShadowPassword()">Enter</button>
-                </div>
-                
-                <button class="back-btn" onclick="backToStart()">戻る</button>
-            </div>
-        </div>
-
-        <!-- Chaos Password Screen -->
-        <div id="chaosScreen" class="screen">
-            <div class="chaos-content">
-                <div class="chaos-header">
-                    <h2>⚡ CHAOS MODE ⚡</h2>
-                    <p>究極の自己開示モード</p>
-                    <p class="chaos-warning">⚠️ 魂の深層まで到達する覚悟はありますか？ ⚠️</p>
-                </div>
-                
-                <div class="password-form">
-                    <input type="password" id="chaosPassword" placeholder="パンドラの箱を開く鍵..." class="password-input chaos-input" onkeypress="handleChaosPasswordKeypress(event)">
-                    <button class="password-btn chaos-btn" onclick="verifyChaosPassword()">Open Pandora</button>
-                </div>
-                
-                <button class="back-btn" onclick="backToStart()">戻る</button>
-            </div>
-        </div>
+        <!-- Password screens removed - direct access enabled -->
 
         <!-- Level Selection Screen -->
         <div id="levelScreen" class="screen">
@@ -200,8 +167,8 @@
         let currentMode = 'normal';
         let currentLevel = 1;
         let currentQuestionIndex = 0;
-        let shadowModeUnlocked = false;
-        let chaosModeUnlocked = false;
+        let shadowModeUnlocked = true; // 常にアンロック
+        let chaosModeUnlocked = true; // 常にアンロック
         let shadowModeCompleted = false;
         let gameState = {
             reactions: 0,
@@ -423,7 +390,7 @@
             }
             
             createHeartBurst(x, y) {
-                const particleCount = currentMode === 'chaos' ? 20 : 12;
+                const particleCount = currentMode === 'chaos' ? 10 : 6;
                 
                 for (let i = 0; i < particleCount; i++) {
                     const angle = (i / particleCount) * Math.PI * 2;
@@ -448,7 +415,7 @@
             }
             
             createHeartTrail(x, y) {
-                for (let i = 0; i < 3; i++) {
+                for (let i = 0; i < 2; i++) {
                     const offsetX = (Math.random() - 0.5) * 20;
                     const offsetY = (Math.random() - 0.5) * 20;
                     const useImage = this.imageLoaded && Math.random() < 0.4;
@@ -471,7 +438,7 @@
             }
             
             createHeartFinale(x, y) {
-                const particleCount = currentMode === 'chaos' ? 25 : 15;
+                const particleCount = currentMode === 'chaos' ? 12 : 8;
                 
                 for (let i = 0; i < particleCount; i++) {
                     const angle = (i / particleCount) * Math.PI * 2;
@@ -621,6 +588,11 @@
             currentMode = mode;
             showScreen('levelScreen');
             generateLevelGrid();
+            
+            // CHAOSモード選択時にエフェクト
+            if (mode === 'chaos') {
+                triggerChaosUnlockEffect();
+            }
         }
 
         // Legacy Mode Selection (互換性のため保持)
@@ -633,84 +605,7 @@
             document.querySelector('.start-btn').disabled = false;
         }
 
-        // Shadow Mode
-        function showShadowEntry() {
-            if (shadowModeUnlocked) {
-                selectMode('shadow');
-                return;
-            }
-            showScreen('shadowScreen');
-        }
-
-        function verifyShadowPassword() {
-            const password = document.getElementById('shadowPassword').value;
-            if (password === 'alcohol') {
-                shadowModeUnlocked = true;
-                currentMode = 'shadow';
-                showScreen('levelScreen'); // 直接レベル選択画面へ
-                generateLevelGrid();
-                document.querySelector('.shadow-mode').classList.add('unlocked');
-                
-                // Check if should reveal CHAOS mode
-                checkChaosAvailability();
-            } else {
-                document.getElementById('shadowPassword').classList.add('error');
-                setTimeout(() => {
-                    document.getElementById('shadowPassword').classList.remove('error');
-                }, 1000);
-            }
-        }
-
-        function handleShadowPasswordKeypress(event) {
-            if (event.key === 'Enter') {
-                verifyShadowPassword();
-            }
-        }
-
-        // CHAOS Mode Functions
-        function showChaosEntry() {
-            if (chaosModeUnlocked) {
-                selectMode('chaos');
-                return;
-            }
-            showScreen('chaosScreen');
-        }
-
-        function verifyChaosPassword() {
-            const password = document.getElementById('chaosPassword').value;
-            if (password === 'pandora') {
-                chaosModeUnlocked = true;
-                currentMode = 'chaos';
-                showScreen('levelScreen'); // 直接レベル選択画面へ
-                generateLevelGrid();
-                document.querySelector('.chaos-mode').classList.add('unlocked');
-                
-                // Trigger intense visual effects
-                triggerChaosUnlockEffect();
-            } else {
-                document.getElementById('chaosPassword').classList.add('error');
-                setTimeout(() => {
-                    document.getElementById('chaosPassword').classList.remove('error');
-                }, 1000);
-            }
-        }
-
-        function handleChaosPasswordKeypress(event) {
-            if (event.key === 'Enter') {
-                verifyChaosPassword();
-            }
-        }
-
-        function checkChaosAvailability() {
-            // Show CHAOS mode if shadow mode is unlocked
-            if (shadowModeUnlocked) {
-                const chaosBtn = document.getElementById('chaosBtn');
-                if (chaosBtn) {
-                    chaosBtn.style.display = 'block';
-                    chaosBtn.style.animation = 'fadeInScale 0.8s ease-out';
-                }
-            }
-        }
+        // Shadow and CHAOS modes are now always available
 
         function triggerChaosUnlockEffect() {
             // Create intense screen flash effect
