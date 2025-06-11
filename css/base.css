@@ -1,0 +1,54 @@
+/* Base Styles */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Noto Sans JP', 'Inter', sans-serif;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    min-height: 100vh;
+    overflow-x: hidden;
+    user-select: none;
+    -webkit-user-select: none;
+    -webkit-touch-callout: none;
+}
+
+/* Typography */
+.gradient-text {
+    background: linear-gradient(45deg, #ff6b9d, #ff8cc8, #ffb3d9, #ff6b9d);
+    background-size: 300% 300%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: gradientShift 3s ease-in-out infinite;
+}
+
+.app-title {
+    font-size: 3rem;
+    font-weight: 900;
+    text-align: center;
+    margin: 20px 0;
+    text-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    animation: titleFloat 4s ease-in-out infinite;
+}
+
+.question-text {
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: white;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+    line-height: 1.6;
+    margin-bottom: 20px;
+}
+
+/* Responsive Typography */
+@media (max-width: 768px) {
+    .app-title { 
+        font-size: 2rem; 
+    }
+    .question-text { 
+        font-size: 1.1rem; 
+    }
+}

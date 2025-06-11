@@ -1,0 +1,113 @@
+/* Button Styles */
+
+.start-button {
+    background: linear-gradient(135deg, #ff6b9d, #ff8cc8, #ffb3d9);
+    color: white;
+    border: none;
+    padding: 20px 50px;
+    border-radius: 40px;
+    font-size: 20px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    box-shadow: 0 10px 30px rgba(255, 107, 157, 0.5);
+    margin: 30px auto;
+    display: block;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+.start-button:hover {
+    transform: translateY(-8px) scale(1.05);
+    box-shadow: 0 20px 50px rgba(255, 107, 157, 0.7);
+    animation: buttonPulse 0.5s ease-in-out;
+}
+
+.reaction-btn {
+    background: linear-gradient(135deg, #ff6b9d, #ff8cc8);
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 25px;
+    font-weight: 600;
+    margin: 8px;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    box-shadow: 0 6px 20px rgba(255, 107, 157, 0.4);
+    font-size: 14px;
+}
+
+.reaction-btn:hover {
+    transform: translateY(-3px) scale(1.05);
+    box-shadow: 0 10px 30px rgba(255, 107, 157, 0.6);
+}
+
+.reaction-btn:active {
+    transform: translateY(-1px) scale(0.98);
+}
+
+.mode-toggle {
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    color: white;
+    border: none;
+    padding: 15px 30px;
+    border-radius: 30px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
+    font-size: 16px;
+    margin: 10px;
+}
+
+.mode-toggle:hover {
+    transform: translateY(-5px) scale(1.05);
+    box-shadow: 0 15px 40px rgba(102, 126, 234, 0.6);
+}
+
+.mode-toggle.active {
+    background: linear-gradient(135deg, #ff6b9d, #ff8cc8);
+    box-shadow: 0 8px 25px rgba(255, 107, 157, 0.6);
+}
+
+.home-button {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    border-radius: 25px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.home-button:hover {
+    transform: translateY(-2px) scale(1.05);
+    box-shadow: 0 6px 20px rgba(102, 126, 234, 0.6);
+}
+
+/* Mobile Button Styles */
+@media (max-width: 768px) {
+    .reaction-btn { 
+        padding: 10px 20px; 
+        font-size: 12px; 
+    }
+    .start-button { 
+        padding: 15px 35px; 
+        font-size: 16px; 
+    }
+    .home-button {
+        top: 15px;
+        left: 15px;
+        padding: 10px 16px;
+        font-size: 14px;
+    }
+}

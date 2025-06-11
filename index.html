@@ -1,0 +1,1059 @@
+
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HeartConnect Ultimate - 真の信頼関係構築プログラム</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+        
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Noto Sans JP', 'Inter', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            overflow-x: hidden;
+            user-select: none;
+            -webkit-user-select: none;
+            -webkit-touch-callout: none;
+        }
+
+        .cosmic-background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('https://gensparkpublicblob.blob.core.windows.net/user-upload-image/image/a2cca4663570cf0ef71caf38005c4f43/image.png') center/cover;
+            z-index: -2;
+            animation: cosmicPulse 8s ease-in-out infinite;
+        }
+
+        .cosmic-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 50% 50%, rgba(139, 69, 19, 0.1) 0%, rgba(25, 25, 112, 0.3) 50%, rgba(0, 0, 0, 0.4) 100%);
+            z-index: -1;
+            animation: overlayShift 12s ease-in-out infinite;
+        }
+
+        @keyframes cosmicPulse {
+            0%, 100% { transform: scale(1) rotate(0deg); }
+            50% { transform: scale(1.05) rotate(1deg); }
+        }
+
+        @keyframes overlayShift {
+            0%, 100% { opacity: 0.6; }
+            50% { opacity: 0.8; }
+        }
+
+        .floating-stars {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .star {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background: white;
+            border-radius: 50%;
+            animation: twinkle 3s ease-in-out infinite;
+        }
+
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.3; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.5); }
+        }
+
+        .main-container {
+            position: relative;
+            z-index: 10;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            backdrop-filter: blur(5px);
+        }
+
+        .gradient-text {
+            background: linear-gradient(45deg, #ff6b9d, #ff8cc8, #ffb3d9, #ff6b9d);
+            background-size: 300% 300%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: gradientShift 3s ease-in-out infinite;
+        }
+
+        @keyframes gradientShift {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        .glass-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 20px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .glass-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+            border-color: rgba(255, 182, 193, 0.5);
+        }
+
+        .level-badge {
+            background: linear-gradient(135deg, #ff6b9d, #ff8cc8);
+            color: white;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-weight: 600;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 4px 15px rgba(255, 107, 157, 0.4);
+            animation: levelPulse 2s ease-in-out infinite;
+        }
+
+        @keyframes levelPulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        .question-card {
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(25px);
+            border: 2px solid rgba(255, 182, 193, 0.3);
+            border-radius: 25px;
+            padding: 30px;
+            margin: 20px 0;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+            transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .question-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s;
+        }
+
+        .question-card:hover::before {
+            left: 100%;
+        }
+
+        .question-card:hover {
+            transform: translateY(-5px) scale(1.02);
+            border-color: rgba(255, 107, 157, 0.6);
+            box-shadow: 0 25px 50px rgba(255, 107, 157, 0.3);
+        }
+
+        .reaction-btn {
+            background: linear-gradient(135deg, #ff6b9d, #ff8cc8);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 25px;
+            font-weight: 600;
+            margin: 8px;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 0 6px 20px rgba(255, 107, 157, 0.4);
+            font-size: 14px;
+        }
+
+        .reaction-btn:hover {
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 10px 30px rgba(255, 107, 157, 0.6);
+        }
+
+        .reaction-btn:active {
+            transform: translateY(-1px) scale(0.98);
+        }
+
+        .mode-toggle {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 30px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
+            font-size: 16px;
+            margin: 10px;
+        }
+
+        .mode-toggle:hover {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 15px 40px rgba(102, 126, 234, 0.6);
+        }
+
+        .mode-toggle.active {
+            background: linear-gradient(135deg, #ff6b9d, #ff8cc8);
+            box-shadow: 0 8px 25px rgba(255, 107, 157, 0.6);
+        }
+
+        .progress-container {
+            width: 100%;
+            height: 8px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 10px;
+            overflow: hidden;
+            margin: 20px 0;
+        }
+
+        .progress-bar {
+            height: 100%;
+            background: linear-gradient(90deg, #ff6b9d, #ff8cc8, #ffb3d9);
+            border-radius: 10px;
+            transition: width 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            animation: progressGlow 2s ease-in-out infinite;
+        }
+
+        @keyframes progressGlow {
+            0%, 100% { box-shadow: 0 0 10px rgba(255, 107, 157, 0.5); }
+            50% { box-shadow: 0 0 20px rgba(255, 107, 157, 0.8); }
+        }
+
+        .particle-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1000;
+        }
+
+        .heart-particle {
+            position: absolute;
+            width: 30px;
+            height: 30px;
+            background-size: contain;
+            background-repeat: no-repeat;
+            animation: floatAway 2s ease-out forwards;
+            pointer-events: none;
+        }
+
+        @keyframes floatAway {
+            0% {
+                opacity: 1;
+                transform: scale(1) rotate(0deg);
+            }
+            100% {
+                opacity: 0;
+                transform: scale(0.3) rotate(360deg) translateY(-200px);
+            }
+        }
+
+        .answer-examples {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(15px);
+            border-radius: 15px;
+            padding: 20px;
+            margin: 15px 0;
+            border: 1px solid rgba(255, 182, 193, 0.3);
+        }
+
+        .example-item {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 12px 18px;
+            margin: 8px 0;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 182, 193, 0.2);
+        }
+
+        .example-item:hover {
+            background: rgba(255, 182, 193, 0.2);
+            transform: translateX(10px);
+        }
+
+        .floating-hearts {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 5;
+        }
+
+        .floating-heart {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background: url('https://gensparkpublicblob.blob.core.windows.net/user-upload-image/image/da29932761c07e021de8d38c2d8e9ebe/image.png') center/contain no-repeat;
+            animation: floatUp 15s linear infinite;
+            opacity: 0.6;
+        }
+
+        @keyframes floatUp {
+            0% {
+                transform: translateY(100vh) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 0.6;
+            }
+            90% {
+                opacity: 0.6;
+            }
+            100% {
+                transform: translateY(-100px) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        .trust-meter {
+            width: 100%;
+            height: 20px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 15px;
+            overflow: hidden;
+            position: relative;
+            margin: 20px 0;
+        }
+
+        .trust-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #ff6b9d, #ff8cc8, #ffb3d9, #ff6b9d);
+            background-size: 200% 100%;
+            border-radius: 15px;
+            transition: width 1s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            animation: trustGlow 3s ease-in-out infinite;
+        }
+
+        @keyframes trustGlow {
+            0%, 100% { 
+                background-position: 0% 50%;
+                box-shadow: 0 0 15px rgba(255, 107, 157, 0.5);
+            }
+            50% { 
+                background-position: 100% 50%;
+                box-shadow: 0 0 25px rgba(255, 107, 157, 0.8);
+            }
+        }
+
+        .app-title {
+            font-size: 3rem;
+            font-weight: 900;
+            text-align: center;
+            margin: 20px 0;
+            text-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+            animation: titleFloat 4s ease-in-out infinite;
+        }
+
+        @keyframes titleFloat {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .start-button {
+            background: linear-gradient(135deg, #ff6b9d, #ff8cc8, #ffb3d9);
+            color: white;
+            border: none;
+            padding: 20px 50px;
+            border-radius: 40px;
+            font-size: 20px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 0 10px 30px rgba(255, 107, 157, 0.5);
+            margin: 30px auto;
+            display: block;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .start-button:hover {
+            transform: translateY(-8px) scale(1.05);
+            box-shadow: 0 20px 50px rgba(255, 107, 157, 0.7);
+            animation: buttonPulse 0.5s ease-in-out;
+        }
+
+        @keyframes buttonPulse {
+            0%, 100% { transform: translateY(-8px) scale(1.05); }
+            50% { transform: translateY(-8px) scale(1.1); }
+        }
+
+        .level-colors-1 { filter: hue-rotate(0deg) saturate(0.8); }
+        .level-colors-2 { filter: hue-rotate(10deg) saturate(0.9); }
+        .level-colors-3 { filter: hue-rotate(20deg) saturate(1.0); }
+        .level-colors-4 { filter: hue-rotate(30deg) saturate(1.1); }
+        .level-colors-5 { filter: hue-rotate(40deg) saturate(1.2); }
+        .level-colors-6 { filter: hue-rotate(50deg) saturate(1.3); }
+        .level-colors-7 { filter: hue-rotate(60deg) saturate(1.4); }
+        .level-colors-8 { filter: hue-rotate(70deg) saturate(1.5); }
+        .level-colors-9 { filter: hue-rotate(80deg) saturate(1.6); }
+
+        .question-text {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: white;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        .unique-mode-indicator {
+            background: linear-gradient(135deg, #ffd700, #ffed4e);
+            color: #333;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-weight: 700;
+            display: inline-block;
+            margin: 10px 0;
+            box-shadow: 0 4px 15px rgba(255, 215, 0, 0.4);
+            animation: uniqueGlow 2s ease-in-out infinite;
+        }
+
+        @keyframes uniqueGlow {
+            0%, 100% { 
+                box-shadow: 0 4px 15px rgba(255, 215, 0, 0.4);
+                transform: scale(1);
+            }
+            50% { 
+                box-shadow: 0 6px 25px rgba(255, 215, 0, 0.6);
+                transform: scale(1.02);
+            }
+        }
+
+        .fade-in {
+            animation: fadeIn 0.8s ease-out forwards;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .slide-in {
+            animation: slideIn 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+        }
+
+        @keyframes slideIn {
+            from { transform: translateX(-100px) scale(0.8); opacity: 0; }
+            to { transform: translateX(0) scale(1); opacity: 1; }
+        }
+
+        @media (max-width: 768px) {
+            .app-title { font-size: 2rem; }
+            .question-text { font-size: 1.1rem; }
+            .question-card { padding: 20px; margin: 15px 0; }
+            .reaction-btn { padding: 10px 20px; font-size: 12px; }
+            .start-button { padding: 15px 35px; font-size: 16px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="cosmic-background"></div>
+    <div class="cosmic-overlay"></div>
+    <div class="floating-stars" id="floatingStars"></div>
+    <div class="floating-hearts" id="floatingHearts"></div>
+    <div class="particle-container" id="particleContainer"></div>
+
+    <div class="main-container">
+        <!-- Start Screen -->
+        <div id="startScreen" class="flex-1 flex flex-col justify-center items-center px-6 py-12">
+            <div class="text-center max-w-4xl">
+                <h1 class="app-title gradient-text mb-8">HeartConnect Ultimate</h1>
+                <p class="text-white text-xl mb-6 leading-relaxed" style="text-shadow: 0 2px 4px rgba(0,0,0,0.5);">
+                    革新的な自己開示プログラムで<br>
+                    真の信頼関係を科学的に構築する
+                </p>
+                <div class="glass-card p-8 mb-8 max-w-2xl mx-auto">
+                    <h3 class="text-white text-lg font-semibold mb-4">🚀 選択してください</h3>
+                    <div class="flex flex-wrap justify-center gap-4">
+                        <button class="mode-toggle" onclick="selectMode('normal')">
+                            <i class="fas fa-heart mr-2"></i>ノーマルモード
+                        </button>
+                        <button class="mode-toggle" onclick="selectMode('unique')">
+                            <i class="fas fa-star mr-2"></i>ユニークモード
+                        </button>
+                    </div>
+                </div>
+                <button class="start-button" onclick="startApp()">
+                    <i class="fas fa-rocket mr-3"></i>Begin Journey
+                </button>
+            </div>
+        </div>
+
+        <!-- Main App -->
+        <div id="mainApp" class="hidden flex-1 px-6 py-8">
+            <div class="max-w-4xl mx-auto w-full">
+                <!-- Header -->
+                <div class="text-center mb-8">
+                    <h2 class="gradient-text text-3xl font-bold mb-4">HeartConnect Ultimate</h2>
+                    <div class="flex justify-center items-center gap-4 mb-4">
+                        <div class="level-badge" id="levelBadge">Level 1</div>
+                        <div class="unique-mode-indicator hidden" id="uniqueModeIndicator">
+                            <i class="fas fa-star mr-2"></i>ユニークモード
+                        </div>
+                    </div>
+                    
+                    <!-- Progress Bar -->
+                    <div class="progress-container">
+                        <div class="progress-bar" id="progressBar" style="width: 11%"></div>
+                    </div>
+                    
+                    <!-- Trust Meter -->
+                    <div class="mt-4">
+                        <p class="text-white text-sm mb-2">信頼度メーター</p>
+                        <div class="trust-meter">
+                            <div class="trust-fill" id="trustFill" style="width: 15%"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Question Card -->
+                <div class="question-card fade-in" id="questionCard" onclick="createHeartBurst(event)">
+                    <div class="question-text" id="questionText">
+                        あなたの理想のデートはどんな場所ですか？
+                    </div>
+                    
+                    <!-- Answer Examples -->
+                    <div class="answer-examples" id="answerExamples">
+                        <h4 class="text-white font-semibold mb-3">
+                            <i class="fas fa-lightbulb mr-2"></i>回答例
+                        </h4>
+                        <div class="example-item" onclick="selectExample(this)">
+                            🌸 桜並木を一緒に歩きながら、お互いの夢について語り合いたい
+                        </div>
+                        <div class="example-item" onclick="selectExample(this)">
+                            🏠 お家でまったりNetflix鑑賞して、好きな映画の話で盛り上がりたい
+                        </div>
+                        <div class="example-item" onclick="selectExample(this)">
+                            🍽️ 高層階のレストランで夜景を見ながら、美味しい料理を楽しみたい
+                        </div>
+                        <div class="example-item" onclick="selectExample(this)">
+                            🎡 遊園地で童心に帰って遊んで、新しい一面を見せ合いたい
+                        </div>
+                        <div class="example-item" onclick="selectExample(this)">
+                            ⭐ プラネタリウムで星空を見ながら、宇宙の話をしてみたい
+                        </div>
+                    </div>
+
+                    <!-- Reaction Buttons -->
+                    <div class="flex flex-wrap justify-center mt-6">
+                        <button class="reaction-btn" onclick="react('empathy')">
+                            <i class="fas fa-heart mr-2"></i>共感！
+                        </button>
+                        <button class="reaction-btn" onclick="react('curious')">
+                            <i class="fas fa-search mr-2"></i>詳しく知りたい♡
+                        </button>
+                        <button class="reaction-btn" onclick="react('more')">
+                            <i class="fas fa-comments mr-2"></i>もっと聞かせて
+                        </button>
+                        <button class="reaction-btn" onclick="react('question')">
+                            <i class="fas fa-question-circle mr-2"></i>質問したい
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Navigation -->
+                <div class="flex justify-between mt-8">
+                    <button class="mode-toggle" onclick="previousQuestion()" id="prevBtn">
+                        <i class="fas fa-chevron-left mr-2"></i>前の質問
+                    </button>
+                    <button class="mode-toggle" onclick="nextQuestion()">
+                        <i class="fas fa-chevron-right mr-2"></i>次の質問
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Global Variables
+        let currentMode = 'normal';
+        let currentLevel = 1;
+        let currentQuestionIndex = 0;
+        let trustLevel = 15;
+        let unlockedLevels = [1, 2, 3];
+        
+        // Question Database
+        const questionDatabase = {
+            normal: {
+                1: [
+                    "あなたの理想のデートはどんな場所ですか？",
+                    "小さな幸せを感じるのはどんな瞬間ですか？",
+                    "最近ハマっていることは何ですか？"
+                ],
+                2: [
+                    "どんな時に人を好きになりますか？",
+                    "子供の頃の夢は何でしたか？今はどうですか？",
+                    "人間関係で最も大切にしていることは何ですか？"
+                ],
+                3: [
+                    "最後に涙を流したのはいつですか？",
+                    "あなたが最も安心できる場所はどこですか？",
+                    "最近、どんなことでイライラしましたか？"
+                ],
+                4: [
+                    "付き合う相手に求める一番大切な要素は何ですか？",
+                    "あなたと付き合うとどんなメリットがありますか？",
+                    "どんな人と一緒にいると居心地が良いですか？"
+                ],
+                5: [
+                    "誰にも言ったことがない秘密はありますか？",
+                    "人には見せない意外な一面はありますか？",
+                    "自分の中で一番直したい欠点は何ですか？"
+                ],
+                6: [
+                    "触れられると嬉しい場所はどこですか？",
+                    "特別な相手とのスキンシップで好きなことは？",
+                    "理想的なキスの仕方や場所はどんな感じですか？"
+                ],
+                7: [
+                    "一晩だけの関係を持ったことはありますか？",
+                    "禁断の恋に落ちたことはありますか？",
+                    "社会的には認められないけれど、密かに持っている願望は？"
+                ],
+                8: [
+                    "これまでで一番セクシーだと感じた経験は？",
+                    "憧れのシチュエーションはありますか？",
+                    "これまでで一番ドキドキした瞬間は？"
+                ],
+                9: [
+                    "パートナーとのベッドでの相性は重要だと思いますか？",
+                    "性的興奮を感じるシチュエーションは？",
+                    "相手に試してほしいことはありますか？"
+                ]
+            },
+            unique: {
+                1: [
+                    "もし透明人間になったら最初に何をしますか？",
+                    "宇宙人に地球を案内するなら何を見せますか？",
+                    "人生がゲームだったらチートを使いますか？"
+                ],
+                2: [
+                    "もし動物と話せたら、何に一番文句を言われそうですか？",
+                    "異世界に転生するなら、どんな能力が欲しいですか？",
+                    "タイムマシンがあったら過去と未来どちらに行きますか？"
+                ],
+                3: [
+                    "もし世界に自分しかいなくなったら何をしますか？",
+                    "スーパーヒーローになるなら、どんな悪と戦いますか？",
+                    "もし記憶を一つだけ消せるなら何を消しますか？"
+                ],
+                4: [
+                    "恋人がロボットだったら付き合い続けますか？",
+                    "もし相手の心が読めたら、読みたいですか？",
+                    "永遠の命と真実の愛、どちらを選びますか？"
+                ],
+                5: [
+                    "もし誰も見ていなければ、どんな悪いことをしたいですか？",
+                    "異性の体になって一日過ごすとしたら何をしますか？",
+                    "もし嘘をつけなくなったら、一番困ることは何ですか？"
+                ],
+                6: [
+                    "もし体のパーツを一つだけ改造できるなら何を変えますか？",
+                    "理想の相手をデザインできるなら、どんな見た目にしますか？",
+                    "もし一晩だけ別人になれるなら、誰になりたいですか？"
+                ],
+                7: [
+                    "もし世界の終わりまであと24時間なら何をしますか？",
+                    "禁断の関係に最も興奮するシチュエーションは？",
+                    "もし法律が存在しなかったら、何をしたいですか？"
+                ],
+                8: [
+                    "もし相手を完全に支配できるなら、何をさせたいですか？",
+                    "一番スリリングな場所でしたいことは何ですか？",
+                    "もし痛みが快感に変わったら、何を試したいですか？"
+                ],
+                9: [
+                    "もし欲望を全て叶えられるなら、最終的に何を求めますか？",
+                    "究極の快楽と究極の愛情、どちらを選びますか？",
+                    "もし今夜が人生最後の夜なら、私と何をしたいですか？"
+                ]
+            }
+        };
+
+        // Answer Examples Database
+        const answerExamples = {
+            normal: {
+                1: [
+                    ["🌸 桜並木を一緒に歩きながら、お互いの夢について語り合いたい", "🏠 お家でまったりNetflix鑑賞して、好きな映画の話で盛り上がりたい", "🍽️ 高層階のレストランで夜景を見ながら、美味しい料理を楽しみたい", "🎡 遊園地で童心に帰って遊んで、新しい一面を見せ合いたい", "⭐ プラネタリウムで星空を見ながら、宇宙の話をしてみたい"],
+                    ["☀️ 朝起きて好きな人からのおはようメッセージを見た時", "🐱 道端で猫に出会って、なでなでできた瞬間", "☕ お気に入りのカフェで完璧なコーヒーに出会えた時", "🌅 綺麗な夕日を見て、今日も一日頑張ったなと思える時", "💝 友達からの突然のサプライズプレゼントをもらった時"],
+                    ["📚 心理学の本を読んで人間関係について学ぶこと", "🎮 友達とオンラインゲームで協力プレイすること", "🍳 新しい料理レシピに挑戦して、美味しく作れること", "📱 TikTokで面白い動画を見つけて友達にシェアすること", "🏃‍♀️ 朝のジョギングで清々しい気持ちになること"]
+                ],
+                2: [
+                    ["😊 その人の笑顔を見ていると自然と幸せな気持ちになった時", "🤝 困っている時にさりげなく手を差し伸べてくれた時", "👁️ 目が合った瞬間に特別な何かを感じた時", "💭 価値観や考え方が似ていて、話していて居心地が良い時", "🌟 その人といると自分らしくいられると感じた時"],
+                    ["👩‍⚕️ お医者さんになって、たくさんの人を助けたかった。今は人を笑顔にする仕事がしたい", "🚀 宇宙飛行士になって宇宙を探検したかった。今でも未知の世界への憧れは変わらない", "🎨 画家になって美しい絵を描きたかった。今は趣味で続けている", "⚽ プロサッカー選手になりたかった。今はスポーツを通じて仲間と楽しんでいる", "🎵 歌手になって多くの人に感動を与えたかった。今でも音楽は人生の一部"],
+                    ["💛 相手を思いやる気持ちを忘れないこと", "🤝 お互いを尊重し、支え合うこと", "💬 どんなことでも正直に話し合えること", "😊 一緒にいて自然体でいられること", "🌈 違いを受け入れ、お互いを成長させ合うこと"]
+                ]
+            },
+            unique: [
+                ["👻 好きな人の部屋をこっそり見に行って、どんな生活をしているか確認する", "🏦 銀行の金庫に忍び込んで、お金がどのくらいあるか数えてみる", "🎬 映画館でタダで最新作を全部見まくる", "✈️ 飛行機にタダ乗りして世界中を旅行する", "👑 有名人の豪邸に忍び込んで、どんな生活をしているか体験する"],
+                ["🛸 日本の温泉文化とおもてなしの心", "🍣 本格的な寿司職人の技術と日本料理の繊細さ", "🌸 四季の美しさ、特に桜の季節の感動", "🏯 古い建築と現代技術の融合した街並み", "🎌 アニメ・マンガ文化と日本のポップカルチャー"],
+                ["💰 お金無限チートで好きなものを全部買う", "❤️ 恋愛チートで理想の相手と確実に結ばれる", "🧠 知識チートで何でも瞬時に理解できるようになる", "⏰ 時間チートで一日を48時間にする", "🎯 運チートで宝くじもギャンブルも全部当たる"]
+            ]
+        };
+
+        // Initialize
+        function init() {
+            createFloatingStars();
+            createFloatingHearts();
+            updateDisplay();
+        }
+
+        function createFloatingStars() {
+            const container = document.getElementById('floatingStars');
+            for (let i = 0; i < 50; i++) {
+                const star = document.createElement('div');
+                star.className = 'star';
+                star.style.left = Math.random() * 100 + '%';
+                star.style.top = Math.random() * 100 + '%';
+                star.style.animationDelay = Math.random() * 3 + 's';
+                container.appendChild(star);
+            }
+        }
+
+        function createFloatingHearts() {
+            const container = document.getElementById('floatingHearts');
+            setInterval(() => {
+                if (Math.random() < 0.3) {
+                    const heart = document.createElement('div');
+                    heart.className = 'floating-heart';
+                    heart.style.left = Math.random() * 100 + '%';
+                    heart.style.animationDelay = Math.random() * 2 + 's';
+                    container.appendChild(heart);
+                    
+                    setTimeout(() => {
+                        if (heart.parentNode) {
+                            heart.parentNode.removeChild(heart);
+                        }
+                    }, 15000);
+                }
+            }, 3000);
+        }
+
+        function selectMode(mode) {
+            currentMode = mode;
+            document.querySelectorAll('.mode-toggle').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            event.target.classList.add('active');
+            
+            if (mode === 'unique') {
+                document.getElementById('uniqueModeIndicator').classList.remove('hidden');
+            } else {
+                document.getElementById('uniqueModeIndicator').classList.add('hidden');
+            }
+        }
+
+        function startApp() {
+            document.getElementById('startScreen').classList.add('hidden');
+            document.getElementById('mainApp').classList.remove('hidden');
+            updateDisplay();
+        }
+
+        function updateDisplay() {
+            const questions = questionDatabase[currentMode][currentLevel];
+            const examples = getAnswerExamples();
+            
+            document.getElementById('questionText').textContent = questions[currentQuestionIndex];
+            document.getElementById('levelBadge').textContent = `Level ${currentLevel}`;
+            
+            // Update progress
+            const totalQuestions = Object.keys(questionDatabase[currentMode]).reduce((sum, level) => {
+                return sum + questionDatabase[currentMode][level].length;
+            }, 0);
+            const currentPosition = getCurrentPosition();
+            const progressPercent = (currentPosition / totalQuestions) * 100;
+            document.getElementById('progressBar').style.width = progressPercent + '%';
+            
+            // Update answer examples
+            updateAnswerExamples(examples);
+            
+            // Update colors based on level
+            updateLevelColors();
+        }
+
+        function getCurrentPosition() {
+            let position = 0;
+            for (let level = 1; level < currentLevel; level++) {
+                if (questionDatabase[currentMode][level]) {
+                    position += questionDatabase[currentMode][level].length;
+                }
+            }
+            return position + currentQuestionIndex + 1;
+        }
+
+        function getAnswerExamples() {
+            if (currentMode === 'normal' && answerExamples.normal[currentLevel]) {
+                return answerExamples.normal[currentLevel][currentQuestionIndex] || [];
+            } else if (currentMode === 'unique') {
+                const uniqueIndex = (currentLevel - 1) * 3 + currentQuestionIndex;
+                return answerExamples.unique[uniqueIndex] || [];
+            }
+            return [];
+        }
+
+        function updateAnswerExamples(examples) {
+            const container = document.getElementById('answerExamples');
+            const exampleItems = container.querySelectorAll('.example-item');
+            
+            exampleItems.forEach((item, index) => {
+                if (examples[index]) {
+                    item.textContent = examples[index];
+                    item.style.display = 'block';
+                } else {
+                    item.style.display = 'none';
+                }
+            });
+        }
+
+        function updateLevelColors() {
+            const card = document.getElementById('questionCard');
+            card.className = `question-card fade-in level-colors-${currentLevel}`;
+        }
+
+        function selectExample(element) {
+            element.style.background = 'rgba(255, 182, 193, 0.3)';
+            element.style.transform = 'translateX(15px) scale(1.02)';
+            createHeartBurst({clientX: element.offsetLeft + element.offsetWidth/2, clientY: element.offsetTop + element.offsetHeight/2});
+            
+            setTimeout(() => {
+                element.style.background = 'rgba(255, 255, 255, 0.1)';
+                element.style.transform = 'translateX(0) scale(1)';
+            }, 1000);
+        }
+
+        function react(type) {
+            const reactions = {
+                empathy: '共感してくれてありがとう！💕',
+                curious: 'もっと詳しく聞かせてね！🤔',
+                more: '続きが気になる！💭',
+                question: '質問があるんだね！❓'
+            };
+            
+            trustLevel += 5;
+            if (trustLevel > 100) trustLevel = 100;
+            
+            document.getElementById('trustFill').style.width = trustLevel + '%';
+            
+            // Create celebration effect
+            createCelebrationEffect();
+            
+            // Show reaction message
+            showReactionMessage(reactions[type]);
+        }
+
+        function showReactionMessage(message) {
+            const msgDiv = document.createElement('div');
+            msgDiv.style.cssText = `
+                position: fixed;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                background: linear-gradient(135deg, #ff6b9d, #ff8cc8);
+                color: white;
+                padding: 20px 30px;
+                border-radius: 25px;
+                font-size: 18px;
+                font-weight: 600;
+                z-index: 10000;
+                box-shadow: 0 10px 30px rgba(255, 107, 157, 0.5);
+                animation: messagePopup 2s ease-out forwards;
+            `;
+            
+            msgDiv.textContent = message;
+            document.body.appendChild(msgDiv);
+            
+            setTimeout(() => {
+                if (msgDiv.parentNode) {
+                    msgDiv.parentNode.removeChild(msgDiv);
+                }
+            }, 2000);
+        }
+
+        function createCelebrationEffect() {
+            for (let i = 0; i < 20; i++) {
+                setTimeout(() => {
+                    createHeartBurst({
+                        clientX: Math.random() * window.innerWidth,
+                        clientY: Math.random() * window.innerHeight
+                    });
+                }, i * 100);
+            }
+        }
+
+        function createHeartBurst(event) {
+            const container = document.getElementById('particleContainer');
+            const rect = document.getElementById('questionCard').getBoundingClientRect();
+            
+            for (let i = 0; i < 15; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'heart-particle';
+                
+                // Choose heart image based on level
+                const heartImage = currentLevel <= 5 ? 
+                    'https://gensparkpublicblob.blob.core.windows.net/user-upload-image/image/da29932761c07e021de8d38c2d8e9ebe/image.png' :
+                    'https://gensparkpublicblob.blob.core.windows.net/user-upload-image/image/2d378e0a4583153a7fae3d2052c2da4a/image.png';
+                
+                particle.style.backgroundImage = `url(${heartImage})`;
+                particle.style.left = (event.clientX - 15 + Math.random() * 30) + 'px';
+                particle.style.top = (event.clientY - 15 + Math.random() * 30) + 'px';
+                particle.style.animationDelay = Math.random() * 0.5 + 's';
+                
+                container.appendChild(particle);
+                
+                setTimeout(() => {
+                    if (particle.parentNode) {
+                        particle.parentNode.removeChild(particle);
+                    }
+                }, 2000);
+            }
+            
+            // Haptic feedback for mobile
+            if (navigator.vibrate) {
+                navigator.vibrate(50);
+            }
+        }
+
+        function nextQuestion() {
+            const questions = questionDatabase[currentMode][currentLevel];
+            
+            if (currentQuestionIndex < questions.length - 1) {
+                currentQuestionIndex++;
+            } else {
+                // Move to next level
+                if (currentLevel < 9) {
+                    currentLevel++;
+                    currentQuestionIndex = 0;
+                    trustLevel += 10;
+                    if (trustLevel > 100) trustLevel = 100;
+                    
+                    // Level up celebration
+                    createLevelUpEffect();
+                } else {
+                    // End of questions
+                    showCompletionMessage();
+                    return;
+                }
+            }
+            
+            updateDisplay();
+        }
+
+        function previousQuestion() {
+            if (currentQuestionIndex > 0) {
+                currentQuestionIndex--;
+            } else if (currentLevel > 1) {
+                currentLevel--;
+                const questions = questionDatabase[currentMode][currentLevel];
+                currentQuestionIndex = questions.length - 1;
+            }
+            
+            updateDisplay();
+        }
+
+        function createLevelUpEffect() {
+            // Create massive heart explosion
+            for (let i = 0; i < 50; i++) {
+                setTimeout(() => {
+                    createHeartBurst({
+                        clientX: Math.random() * window.innerWidth,
+                        clientY: Math.random() * window.innerHeight
+                    });
+                }, i * 50);
+            }
+            
+            showReactionMessage(`🎉 Level ${currentLevel} 解放！ 信頼度アップ！`);
+        }
+
+        function showCompletionMessage() {
+            const msgDiv = document.createElement('div');
+            msgDiv.style.cssText = `
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: rgba(0, 0, 0, 0.8);
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                z-index: 10000;
+                color: white;
+                text-align: center;
+                padding: 20px;
+            `;
+            
+            msgDiv.innerHTML = `
+                <h2 style="font-size: 3rem; margin-bottom: 20px;" class="gradient-text">🎊 完了！ 🎊</h2>
+                <p style="font-size: 1.5rem; margin-bottom: 30px;">真の信頼関係構築プログラム完了！</p>
+                <p style="font-size: 1.2rem; margin-bottom: 40px;">信頼度: ${trustLevel}% 達成</p>
+                <button onclick="restartApp()" style="
+                    background: linear-gradient(135deg, #ff6b9d, #ff8cc8);
+                    color: white;
+                    border: none;
+                    padding: 15px 30px;
+                    border-radius: 25px;
+                    font-size: 18px;
+                    font-weight: 700;
+                    cursor: pointer;
+                ">もう一度始める</button>
+            `;
+            
+            document.body.appendChild(msgDiv);
+        }
+
+        function restartApp() {
+            currentLevel = 1;
+            currentQuestionIndex = 0;
+            trustLevel = 15;
+            
+            const completionDiv = document.querySelector('body > div:last-child');
+            if (completionDiv) {
+                completionDiv.remove();
+            }
+            
+            document.getElementById('startScreen').classList.remove('hidden');
+            document.getElementById('mainApp').classList.add('hidden');
+        }
+
+        // CSS Animations
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes messagePopup {
+                0% { opacity: 0; transform: translate(-50%, -50%) scale(0.5); }
+                20% { opacity: 1; transform: translate(-50%, -50%) scale(1.1); }
+                100% { opacity: 0; transform: translate(-50%, -50%) scale(1) translateY(-50px); }
+            }
+        `;
+        document.head.appendChild(style);
+
+        // Initialize app
+        init();
+    </script>
+</body>
+</html>
